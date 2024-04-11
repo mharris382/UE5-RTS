@@ -24,6 +24,12 @@ public:
 	// Sets default values for this component's properties
 	UPlayerPawnStateComponent();
 
+	 UFUNCTION(BlueprintImplementableEvent)
+	 void OnStateEntered(UEnhancedInputLocalPlayerSubsystem* inputSubsystem);
+
+	 UFUNCTION(BlueprintImplementableEvent)
+	 void OnStateExited(UEnhancedInputLocalPlayerSubsystem* inputSubsystem);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

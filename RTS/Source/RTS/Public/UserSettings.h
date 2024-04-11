@@ -16,7 +16,7 @@ class RTS_API UUserSettings : public USaveGame
 public:
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveGame")
-	FString mostRecentSaveSlot;
+	int mostRecentSaveSlot;
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveGame")
 	TArray<int> qualitySettings;

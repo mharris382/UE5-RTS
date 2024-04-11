@@ -359,3 +359,17 @@ void ARTS_PlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	}
 }
 
+void ARTS_PlayerPawn::ChangeState(UPlayerPawnStateComponent* newState)
+{
+	if (currentState)
+	{
+		currentState->ExitState();
+	}
+	
+	currentState = newState;
+	
+	if (currentState)
+	{
+		currentState->EnterState();
+	}
+}

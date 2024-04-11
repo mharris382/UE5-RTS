@@ -2,7 +2,7 @@
 
 
 #include "PlayerPawnStateComponent.h"
-
+#include "RTS_PlayerPawn.h"
 #include "EnhancedInputSubsystems.h"
 
 // Sets default values for this component's properties
@@ -37,25 +37,36 @@ void UPlayerPawnStateComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 void UPlayerPawnStateComponent::EnterState()
 {
-	APawn* pawn = Cast<APawn>(GetOwner());
+	ARTS_PlayerPawn* pawn = Cast<ARTS_PlayerPawn>(GetOwner());
 	if (APlayerController* PC = Cast<APlayerController>(pawn->Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem< UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
 		{
-
+			Subsystem->AddMappingContext(StateMappingContext, 1);
+			OnStateEntered(Subsystem);
 		}
 	}
 }
 
 void UPlayerPawnStateComponent::ExitState()
 {
-	APawn* pawn = Cast<APawn>(GetOwner());
+	ARTS_PlayerPawn* pawn = Cast<ARTS_PlayerPawn>(GetOwner());
 	if (APlayerController* PC = Cast<APlayerController>(pawn->Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem< UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
 		{
-
+			Subsystem->RemoveMappingContext(StateMappingContext);
+			OnStateExited(Subsystem);
 		}
 	}
 }
 
+
+
+//void UPlayerPawnStateComponent::OnStateEntered(UEnhancedInputLocalPlayerSubsystem* inputSubsystem)
+//{
+//}
+//
+//void UPlayerPawnStateComponent::OnStateExited(UEnhancedInputLocalPlayerSubsystem* inputSubsystem)
+//{
+//}

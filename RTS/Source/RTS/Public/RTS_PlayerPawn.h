@@ -7,8 +7,8 @@
 #include "Logging/LogMacros.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Curves/CurveFloat.h"
-#include "Logging/LogMacros.h"
 #include "GameFramework/Actor.h"
+#include "PlayerPawnStateComponent.h"
 #include "RTS_PC.h"
 #include "RTS_PlayerPawn.generated.h"
 
@@ -62,6 +62,8 @@ class RTS_API ARTS_PlayerPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ARTS_PlayerPawn();
+
+	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USceneComponent> DefaultSceneRoot;
@@ -145,6 +147,8 @@ protected:
 	EInputDeviceType inputDeviceType;
 
 	FVector StoredMove;
+	
+	TObjectPtr< UPlayerPawnStateComponent> currentState;
 
 public:	
 	// Called every frame
@@ -152,6 +156,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeState(UPlayerPawnStateComponent* newState);
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

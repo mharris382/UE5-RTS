@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "UObject/RandomStream.h"
+#include "Math/RandomStream.h"
 #include "GameFramework/SaveGame.h"
 #include "RTS_SaveGame.generated.h"
 
@@ -18,7 +18,7 @@ enum class EResourceType : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FStockpile
+struct FSaveStockpile
 {
     GENERATED_BODY()
     
@@ -32,6 +32,8 @@ struct FStockpile
 USTRUCT(BlueprintType)
 struct FSaveInteract
 {
+    GENERATED_BODY()
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FTransform Location;
 
@@ -43,43 +45,49 @@ struct FSaveInteract
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FName Tag;
-}
+};
 
 USTRUCT(BlueprintType)
 struct FSaveAgent
 {
+    GENERATED_BODY()
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
-    FVector Location;
+    FVector Location = FVector();
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FName Task;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
-    float Health;
+    float Health = 10;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FText Name;
-}
+};
 
 
 USTRUCT(BlueprintType)
 struct FSaveVillager
 {
+    GENERATED_BODY()
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FSaveAgent basicInfo;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
-    float EnergyLevel;
+    float EnergyLevel = 10;
 };
 
 USTRUCT(BlueprintType)
 struct FSaveWizard
 {
+    GENERATED_BODY()
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     FSaveAgent basicInfo;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
-    float Mana;
+    float Mana= 10;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
     TArray<FName> unlockedSpells;
@@ -99,7 +107,7 @@ public:
     FRandomStream Seed;
 
     UPROPERTY(VisibleAnywhere, Category = "SaveGame")
-    TArray<FStockpile> Stockpiles;
+    TArray<FSaveStockpile> Stockpiles;
 
     UPROPERTY(VisibleAnywhere, Category = "SaveGame")
     TArray<FSaveInteract> Interactables;
