@@ -13,3 +13,14 @@ enum class EAbilityInputID : uint8
     Punch,
     Cast
 };
+
+UENUM(BlueprintType)
+enum class EWizardDiscipline : uint8
+{
+    Novice,
+    Arcane,
+    Elemental,
+    Druid,
+    Holy,
+    Demonic
+};
