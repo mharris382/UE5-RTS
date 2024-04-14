@@ -2,6 +2,11 @@
 
 
 #include "Agent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "Components/CapsuleComponent.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 AAgent::AAgent()
@@ -9,6 +14,26 @@ AAgent::AAgent()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Collision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
+	RootComponent = Collision;
+
+	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
+	SkeletalMesh->SetupAttachment(Collision);
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> mesh(TEXT("/Script/Engine.SkeletalMesh'/Game/Characters/Meshes/SKM_Villager.SKM_Villager'"));
+	if(mesh.Succeeded())
+	{
+		SkeletalMesh->SetSkeletalMesh(mesh.Object);
+		SkeletalMesh->SetCustomPrimitiveDataFloat(0,UKismetMathLibrary::RandomFloat());
+		SkeletalMesh->SetCustomPrimitiveDataFloat(1,UKismetMathLibrary::RandomFloat());
+	}
+	
+	Hat = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Hat"));
+	Hat->SetupAttachment(SkeletalMesh, TEXT("headSocket"));
+	
+	Hair = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Hair"));
+	Hair->SetupAttachment(SkeletalMesh);
+	
+	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
 }
 
 // Called when the game starts or when spawned

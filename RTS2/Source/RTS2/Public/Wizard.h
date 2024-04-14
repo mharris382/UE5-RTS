@@ -9,11 +9,15 @@
 
 #include "Wizard.generated.h"
 
-UCLASS()
+
+
+UCLASS(config=Game)
 class RTS2_API AWizard : public AAgent, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
+
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability", meta = (AllowPrivateAccess = "true"))
 	class UWizardAbilitySystemComponent* AbilitySystemComponent;
 

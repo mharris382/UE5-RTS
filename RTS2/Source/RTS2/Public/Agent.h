@@ -6,7 +6,11 @@
 #include "GameFramework/Pawn.h"
 #include "Agent.generated.h"
 
-UCLASS()
+class USkeletalMeshComponent;
+class UFloatingPawnMovement;
+class UCapsuleComponent;
+
+UCLASS(config=Game)
 class RTS2_API AAgent : public APawn
 {
 	GENERATED_BODY()
@@ -16,7 +20,21 @@ class RTS2_API AAgent : public APawn
 public:
 	// Sets default values for this pawn's properties
 	AAgent();
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCapsuleComponent* Collision;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* SkeletalMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* Hat;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* Hair;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UFloatingPawnMovement* Movement;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

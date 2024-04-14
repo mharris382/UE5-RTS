@@ -4,7 +4,9 @@
 #include "Wizard.h"
 #include "WizardAbilitySystemComponent.h"
 #include "GameplayEffectTypes.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "WizardAttributeSet.h"
+#include "UObject/ConstructorHelpers.h"
 #include "WizardGameplayAbility.h"
 
 // Sets default values
@@ -12,12 +14,17 @@ AWizard::AWizard()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
 	AbilitySystemComponent = CreateDefaultSubobject<UWizardAbilitySystemComponent>("AbilitySystemComp");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UWizardAttributeSet>("Attributes");
+	static ConstructorHelpers::FClassFinder<UAnimInstance> animClass(TEXT("/Script/Engine.AnimBlueprint'/Game/Characters/Animations/ABP_Wizard.ABP_Wizard'"));
+	if(animClass.Succeeded())
+	{
+		SkeletalMesh->SetAnimClass(animClass.Class);
+	}
 }
 
 UAbilitySystemComponent* AWizard::GetAbilitySystemComponent() const

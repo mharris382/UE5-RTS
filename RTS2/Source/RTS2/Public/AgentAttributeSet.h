@@ -16,7 +16,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(config=Game)
 class RTS2_API UAgentAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()

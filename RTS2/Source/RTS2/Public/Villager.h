@@ -8,7 +8,7 @@
 #include "GameplayEffectTypes.h"
 #include "Villager.generated.h"
 
-UCLASS()
+UCLASS(config=Game)
 class RTS2_API AVillager : public AAgent
 {
 	GENERATED_BODY()
