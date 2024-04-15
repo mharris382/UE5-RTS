@@ -15,30 +15,33 @@ class RTS2_API AAgent : public APawn
 {
 	GENERATED_BODY()
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCapsuleComponent* Collision;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UFloatingPawnMovement* Movement;
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	// USkeletalMeshComponent* SkeletalMesh;
+	//
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	// USkeletalMeshComponent* Hat;
+	//
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	// USkeletalMeshComponent* Hair;
+
 	
 
 public:
 	// Sets default values for this pawn's properties
 	AAgent();
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UCapsuleComponent* Collision;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USkeletalMeshComponent* SkeletalMesh;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USkeletalMeshComponent* Hat;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USkeletalMeshComponent* Hair;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UFloatingPawnMovement* Movement;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFloatingPawnMovement* GetMovement() const;
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

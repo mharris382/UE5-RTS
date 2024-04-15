@@ -20,11 +20,7 @@ AWizard::AWizard()
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UWizardAttributeSet>("Attributes");
-	static ConstructorHelpers::FClassFinder<UAnimInstance> animClass(TEXT("/Script/Engine.AnimBlueprint'/Game/Characters/Animations/ABP_Wizard.ABP_Wizard'"));
-	if(animClass.Succeeded())
-	{
-		SkeletalMesh->SetAnimClass(animClass.Class);
-	}
+	
 }
 
 UAbilitySystemComponent* AWizard::GetAbilitySystemComponent() const
