@@ -26,3 +26,8 @@ void UAgentAttributeSet::OnRep_AttackPower(const FGameplayAttributeData& OldAtta
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAgentAttributeSet, AttackPower, OldAttackPower);
 }
+
+void UAgentAttributeSet::OnRep_MoveSpeed(const FGameplayAttributeData& OldMoveSpeed)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAgentAttributeSet, MoveSpeed, OldMoveSpeed);
+}

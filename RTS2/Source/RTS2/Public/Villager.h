@@ -13,6 +13,12 @@ class RTS2_API AVillager : public AAgent
 {
 	GENERATED_BODY()
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability", meta = (AllowPrivateAccess = "true"))
+	class UVillagerAbilitySystemComponent* AbilitySystemComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability", meta = (AllowPrivateAccess = "true"))
+	class UVillagerAttributeSet* AttributeSet;
+	
 public:
 	// Sets default values for this pawn's properties
 	AVillager();
@@ -27,4 +33,5 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual UAbilitySystemComponent* GetAgentAbilitySystemComponent() const override;
 };

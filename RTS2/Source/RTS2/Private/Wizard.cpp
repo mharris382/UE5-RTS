@@ -60,7 +60,8 @@ void AWizard::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	if(!AbilitySystemComponent)return;
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	
+	AbilitySystemComponent->InitAbilityActorInfo(GameplayOwner ? GameplayOwner : NewController, this);
 	InitializeAttributes();
 	GiveAbilities();
 }
@@ -70,7 +71,7 @@ void AWizard::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 	if(!AbilitySystemComponent)return;
 	
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	AbilitySystemComponent->InitAbilityActorInfo(GameplayOwner ? GameplayOwner : this, this);
 	InitializeAttributes();
 	if(AbilitySystemComponent && InputComponent)
 	{
@@ -106,5 +107,10 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		 static_cast<int32>(EAbilityInputID::Confirm),  static_cast<int32>(EAbilityInputID::Cancel));
 		AbilitySystemComponent->BindAbilityActivationToInputComponent(InputComponent, Binds);
 	}
+}
+
+UAbilitySystemComponent* AWizard::GetAgentAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
 }
 

@@ -43,4 +43,14 @@ public:
 	
 	UFUNCTION()
 	virtual void OnRep_AttackPower(const FGameplayAttributeData& OldAttackPower);
+
+
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes", ReplicatedUsing=OnRep_MoveSpeed)
+	FGameplayAttributeData MoveSpeed;
+	
+	ATTRIBUTE_ACCESSORS(UAgentAttributeSet, MoveSpeed);
+	
+	UFUNCTION()
+	virtual void OnRep_MoveSpeed(const FGameplayAttributeData& OldMoveSpeed);
 };

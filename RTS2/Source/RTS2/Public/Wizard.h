@@ -41,6 +41,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Ability")
 	TArray<TSubclassOf<class UWizardGameplayAbility>> DefaultAbilities;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Ability")
+	TObjectPtr<AActor> GameplayOwner;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
 	float WizardLevel = 1;
@@ -55,4 +58,5 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual UAbilitySystemComponent* GetAgentAbilitySystemComponent() const override;
 };

@@ -49,4 +49,5 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual class UAbilitySystemComponent* GetAgentAbilitySystemComponent() const { return nullptr; }
 };
