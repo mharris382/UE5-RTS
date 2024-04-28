@@ -86,7 +86,11 @@ void AWizard::OnRep_PlayerState()
 void AWizard::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if(AbilitySystemComponent)
+	{
+		InitializeAttributes();
+		GiveAbilities();
+	}
 }
 
 // Called every frame
@@ -100,13 +104,13 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	
-	if(AbilitySystemComponent && InputComponent)
-	{
-		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel",
-		 FTopLevelAssetPath(GetPathNameSafe(UClass::TryFindTypeSlow<UEnum>("EAbilityInputID"))),
-		 static_cast<int32>(EAbilityInputID::Confirm),  static_cast<int32>(EAbilityInputID::Cancel));
-		AbilitySystemComponent->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
+	// if(AbilitySystemComponent && InputComponent)
+	// {
+	// 	const FGameplayAbilityInputBinds Binds("Confirm", "Cancel",
+	// 	 FTopLevelAssetPath(GetPathNameSafe(UClass::TryFindTypeSlow<UEnum>("EAbilityInputID"))),
+	// 	 static_cast<int32>(EAbilityInputID::Confirm),  static_cast<int32>(EAbilityInputID::Cancel));
+	// 	AbilitySystemComponent->BindAbilityActivationToInputComponent(InputComponent, Binds);
+	// }
 }
 
 UAbilitySystemComponent* AWizard::GetAgentAbilitySystemComponent() const

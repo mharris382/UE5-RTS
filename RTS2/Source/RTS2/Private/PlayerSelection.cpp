@@ -39,6 +39,7 @@ void UPlayerSelection::OnPawnDragged(APawn* draggedPawn, FVector dragEndPosition
 {
 	if(!draggedPawn)
 		return;
+	SetFocusedActor(draggedPawn);
 	APlayerController* playerController = Cast<APlayerController>(draggedPawn->GetController());
 	APawn* playerPawn = playerController ? playerController->GetPawn() : nullptr;
 	if(dragEndActor && dragEndActor != playerPawn)
@@ -49,6 +50,7 @@ void UPlayerSelection::OnPawnDragged(APawn* draggedPawn, FVector dragEndPosition
 	{
 		OnPawnDraggedToLocation(draggedPawn, dragEndPosition);
 	}
+	
 }
 
 void UPlayerSelection::FocusedActorChanged_Implementation(AActor* actor)
