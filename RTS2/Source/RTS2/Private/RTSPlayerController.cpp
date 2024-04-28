@@ -4,16 +4,17 @@
 #include "RTSPlayerController.h"
 #include "RTSPlayerState.h"
 
+
 ARTSPlayerController::ARTSPlayerController()
 {
 }
 
 void ARTSPlayerController::ReturnToDefaultState()
 {
-	ChangeState(DefaultState);
+	ChangeRTSState(DefaultState);
 }
 
-void ARTSPlayerController::ChangeState(URTSPlayerState* newState)
+void ARTSPlayerController::ChangeRTSState(URTSPlayerState* newState)
 {
 	if(CurrentState)
 	{

@@ -24,7 +24,7 @@ public:
 	void ReturnToDefaultState();
 
 	UFUNCTION(BlueprintCallable, Category = "States")
-	void ChangeState(URTSPlayerState* newState);
+	void ChangeRTSState(URTSPlayerState* newState);
 
 	UFUNCTION(BlueprintCallable, Category = "States")
 	void AddSubState(URTSPlayerState* newSubState);
