@@ -118,3 +118,22 @@ UAbilitySystemComponent* AWizard::GetAgentAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+bool AWizard::TrySetMagicalDiscipline(EWizardDiscipline NewDiscipline)
+{
+	if(MagicalDiscipline != EWizardDiscipline::Novice)
+	{
+		return false;
+	}
+	else
+	{
+		MagicalDiscipline = NewDiscipline;
+		SetMagicalDiscipline(NewDiscipline);
+		return true;
+	}
+}
+
+void AWizard::SetMagicalDiscipline_Implementation(EWizardDiscipline NewDiscipline)
+{
+	
+}
+

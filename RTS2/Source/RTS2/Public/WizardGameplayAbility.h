@@ -19,4 +19,6 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Ability")
 	EAbilityInputID AbilityInputID = EAbilityInputID::None;
+
+	
 };

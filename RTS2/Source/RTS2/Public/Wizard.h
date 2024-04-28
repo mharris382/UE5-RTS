@@ -6,6 +6,7 @@
 #include "Agent.h"
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
+#include "RTS2/RTS2.h"
 
 #include "Wizard.generated.h"
 
@@ -47,6 +48,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
 	float WizardLevel = 1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Magic")
+	EWizardDiscipline MagicalDiscipline = EWizardDiscipline::Novice;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -59,4 +63,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual UAbilitySystemComponent* GetAgentAbilitySystemComponent() const override;
+
+	UFUNCTION(BlueprintCallable, Category = "Magic")
+	bool TrySetMagicalDiscipline(EWizardDiscipline NewDiscipline);	
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Magic")
+	void SetMagicalDiscipline(EWizardDiscipline NewDiscipline);
+
+	void SetMagicalDiscipline_Implementation(EWizardDiscipline NewDiscipline);
 };
