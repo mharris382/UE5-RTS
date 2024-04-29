@@ -74,6 +74,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Magic")
 	float GetWizardLevel() const {return WizardLevel; }
 
+	UFUNCTION(BlueprintCallable, Category = "Magic")
+	void SetWizardLevel(float NewLevel) { WizardLevel = NewLevel; }
+
 	void SetMagicalDiscipline_Implementation(EWizardDiscipline NewDiscipline);
 
 private:
