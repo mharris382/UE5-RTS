@@ -31,6 +31,7 @@ public:
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	virtual void InitializeOwnerActor();
 	virtual void InitializeAttributes();
 	virtual void GiveAbilities();
 
@@ -70,5 +71,13 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category = "Magic")
 	void SetMagicalDiscipline(EWizardDiscipline NewDiscipline);
 
+	UFUNCTION(BlueprintCallable, Category = "Magic")
+	float GetWizardLevel() const {return WizardLevel; }
+
 	void SetMagicalDiscipline_Implementation(EWizardDiscipline NewDiscipline);
+
+private:
+	FTimerHandle WaitForPlayerPawnHandle;
+
+	void CheckIfPlayerPawnExists();
 };

@@ -28,6 +28,20 @@ UAbilitySystemComponent* AWizard::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+void AWizard::InitializeOwnerActor()
+{
+	APlayerController* pc = GetWorld()->GetFirstPlayerController();
+	if(pc && pc->GetPawn())
+	{
+		APawn* playerPawn = pc->GetPawn();
+	}
+	else
+	{
+		WaitForPlayerPawnHandle.Invalidate();
+		GetWorld()->GetTimerManager().SetTimer(WaitForPlayerPawnHandle, this,  &AWizard::CheckIfPlayerPawnExists, 0.2f, true);
+	}
+}
+
 void AWizard::InitializeAttributes()
 {
 	if(AbilitySystemComponent && DefaultAttributeEffect)
@@ -88,6 +102,7 @@ void AWizard::BeginPlay()
 	Super::BeginPlay();
 	if(AbilitySystemComponent)
 	{
+		
 		InitializeAttributes();
 		GiveAbilities();
 	}
@@ -135,5 +150,17 @@ bool AWizard::TrySetMagicalDiscipline(EWizardDiscipline NewDiscipline)
 void AWizard::SetMagicalDiscipline_Implementation(EWizardDiscipline NewDiscipline)
 {
 	
+}
+
+//wait for player pawn to exist and assign owner actor to ability system component
+void AWizard::CheckIfPlayerPawnExists()
+{
+	APlayerController* pc = GetWorld()->GetFirstPlayerController();
+	if(pc && pc->GetPawn() && AbilitySystemComponent)
+	{
+		APawn* playerPawn = pc->GetPawn();
+		AbilitySystemComponent->SetOwnerActor(playerPawn);
+		WaitForPlayerPawnHandle.Invalidate();
+	}
 }
 
