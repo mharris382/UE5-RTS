@@ -50,4 +50,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual class UAbilitySystemComponent* GetAgentAbilitySystemComponent() const { return nullptr; }
+
+	
+
+private:
+
+	
+	
+	
 };

@@ -2,6 +2,9 @@
 
 
 #include "Agent.h"
+
+#include "AbilitySystemComponent.h"
+#include "WizardAttributeSet.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/CapsuleComponent.h"
@@ -63,4 +66,8 @@ void AAgent::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+
+
+
 

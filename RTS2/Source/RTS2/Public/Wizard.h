@@ -34,6 +34,7 @@ public:
 	virtual void InitializeOwnerActor();
 	virtual void InitializeAttributes();
 	virtual void GiveAbilities();
+	virtual void SubscribeToAttributeChanges();
 
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -61,6 +62,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual UAbilitySystemComponent* GetAgentAbilitySystemComponent() const override;
@@ -83,4 +86,19 @@ private:
 	FTimerHandle WaitForPlayerPawnHandle;
 
 	void CheckIfPlayerPawnExists();
+
+public:
+	virtual void OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data) ;
+	virtual void OnHealthAttributeChanged(const FOnAttributeChangeData& Data) ;
+	virtual void OnManaAttributeChanged(const FOnAttributeChangeData& Data);
+
+private:
+	FDelegateHandle OnHealthChangedDelegateHandle;
+	FDelegateHandle OnManaChangedDelegateHandle;
+	FDelegateHandle OnMoveSpeedChangedDelegateHandle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Movement")
+	float BaseMoveSpeed = 300.0f;
+
+	
 };

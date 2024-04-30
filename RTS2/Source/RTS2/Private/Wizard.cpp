@@ -69,6 +69,14 @@ void AWizard::GiveAbilities()
 	}
 }
 
+void AWizard::SubscribeToAttributeChanges()
+{
+	if(!AbilitySystemComponent)return;
+	OnMoveSpeedChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMoveSpeedAttribute()).AddUObject(this, &AWizard::OnMoveSpeedAttributeChanged);
+	OnHealthChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHealthAttribute()).AddUObject(this, &AWizard::OnHealthAttributeChanged);
+	OnManaChangedDelegateHandle = AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetManaAttribute()).AddUObject(this, &AWizard::OnManaAttributeChanged);
+}
+
 void AWizard::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -78,6 +86,7 @@ void AWizard::PossessedBy(AController* NewController)
 	AbilitySystemComponent->InitAbilityActorInfo(GameplayOwner ? GameplayOwner : NewController, this);
 	InitializeAttributes();
 	GiveAbilities();
+	SubscribeToAttributeChanges();
 }
 
 void AWizard::OnRep_PlayerState()
@@ -102,9 +111,9 @@ void AWizard::BeginPlay()
 	Super::BeginPlay();
 	if(AbilitySystemComponent)
 	{
-		
 		InitializeAttributes();
 		GiveAbilities();
+		SubscribeToAttributeChanges();
 	}
 }
 
@@ -163,4 +172,20 @@ void AWizard::CheckIfPlayerPawnExists()
 		WaitForPlayerPawnHandle.Invalidate();
 	}
 }
+
+void AWizard::OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	
+}
+
+void AWizard::OnHealthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	
+}
+
+void AWizard::OnManaAttributeChanged(const FOnAttributeChangeData& Data)
+{
+}
+
+
 
